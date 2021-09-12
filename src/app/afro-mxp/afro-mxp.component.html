@@ -128,6 +128,23 @@
     </button>
   </div>
   <div [hidden]="!showConfirm">
+    <h3>Confirm Registration Details</h3>
+    <ul>
+      <li>First Name: </li>
+      <li>Last Name: </li>
+      <li>Phone Number: </li>
+      <li>Campaign Name: </li>
+      <li>Campaign Type: </li>
+      <li>Target Amount: </li>
+      <li>Start Date: </li>
+      <li>End Date: </li>
+    </ul>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Confirm</span>
+    </button>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Cancel</span>
+    </button>
   </div>
   <div [hidden]="!showActivationSuccess">
   </div>
