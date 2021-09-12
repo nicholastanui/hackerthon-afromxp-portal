@@ -68,8 +68,64 @@
     </div>
   </div>
   <div [hidden]="!showRegister1">
+    <h3>Begin Campaign Registration</h3>
+    <div class="wrapper">
+      <div class="form">
+        <div class="inputfield">
+          <label>First Name</label>
+          <input type="text" class="input">
+        </div>
+        <div class="inputfield">
+          <label>Last Name</label>
+          <input type="text" class="input">
+        </div>
+        <div class="inputfield">
+          <label>Phone Number</label>
+          <input type="text" class="input">
+        </div>
+      </div>
+    </div>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Next</span>
+    </button>
   </div>
   <div [hidden]="!showRegister2">
+    <h3>Continue Campaign Registration</h3>
+    <div class="wrapper">
+      <div class="form">
+        <div class="inputfield">
+          <label>Campaign Name</label>
+          <input type="text" class="input">
+        </div>
+        <div class="inputfield">
+          <label>Campaign Type</label>
+          <div class="custom_select">
+            <select>
+              <option value="">Select</option>
+              <option value="female">Education Fund</option>
+              <option value="female">Wedding Fund</option>
+              <option value="male">Medical Fund</option>
+              <option value="female">Funeral Fund</option>
+            </select>
+          </div>
+        </div>
+        <div class="inputfield">
+          <label>Target Amount</label>
+          <input type="number" class="input">
+        </div>
+        <div class="inputfield">
+          <label>Campaign Start Date</label>
+          <input type="date" class="input">
+        </div>
+        <div class="inputfield">
+          <label>Campaign End Date</label>
+          <input type="date" class="input">
+        </div>
+      </div>
+    </div>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Complete</span>
+    </button>
   </div>
   <div [hidden]="!showConfirm">
   </div>

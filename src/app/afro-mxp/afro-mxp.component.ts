@@ -19,7 +19,7 @@ public showActivationFailed = false;
 
   ngOnInit(): void {
     this.showGetStarted = false;
-    this.showPreRegTerms = true;
+    this.showRegister2 = true;
   }
 
 }
