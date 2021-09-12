@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AfroMxpComponent implements OnInit {
 public showGetStarted = true;
+public showPreRegTerms = false;
 public showRegister1 = false;
 public showRegister2 = false;
 public showConfirm = false;
@@ -17,7 +18,8 @@ public showActivationFailed = false;
   constructor() { }
 
   ngOnInit(): void {
-    this.showGetStarted = true;
+    this.showGetStarted = false;
+    this.showPreRegTerms = true;
   }
 
 }

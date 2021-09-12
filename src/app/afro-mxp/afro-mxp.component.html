@@ -48,6 +48,35 @@
     </div>
 
   </div>
+  <div [hidden]="!showPreRegTerms">
+    <h3>A few things to note before registration</h3>
+    <ul>
+      <li>Condition 1</li>
+      <li>Condition 2</li>
+      <li>Condition 3</li>
+      <li>Condition 4</li>
+      <li>Condition 5</li>
+    </ul>
+    <div class="card-container">
+      <button class="card card-small" (click)="selection.value = 'component'" tabindex="0">
+        <span>Agree</span>
+      </button>
+
+      <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+        <span>Disagree</span>
+      </button>
+    </div>
+  </div>
+  <div [hidden]="!showRegister1">
+  </div>
+  <div [hidden]="!showRegister2">
+  </div>
+  <div [hidden]="!showConfirm">
+  </div>
+  <div [hidden]="!showActivationSuccess">
+  </div>
+  <div [hidden]="!showActivationFailed">
+  </div>
 
   <!-- Footer -->
   <footer>
