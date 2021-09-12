@@ -67,18 +67,18 @@
       </button>
     </div>
   </div>
-  <div [hidden]="!showRegister1">
+  <div [hidden]="!showPhoneInput">
     <h3>Begin Campaign Registration</h3>
     <div class="wrapper">
       <div class="form">
-        <div class="inputfield">
+        <!--<div class="inputfield">
           <label>First Name</label>
           <input type="text" class="input">
         </div>
         <div class="inputfield">
           <label>Last Name</label>
           <input type="text" class="input">
-        </div>
+        </div>-->
         <div class="inputfield">
           <label>Phone Number</label>
           <input type="text" class="input">
@@ -87,6 +87,23 @@
     </div>
     <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
       <span>Next</span>
+    </button>
+  </div>
+  <div [hidden]="!showOTPInput">
+    <h3>One Time Password</h3>
+    <div class="wrapper">
+      <div class="form">
+        <div class="inputfield">
+          <label>Enter One Time Password</label>
+          <input type="text" class="input">
+        </div>
+      </div>
+    </div>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Verify</span>
+    </button>
+    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
+      <span>Resend OTP</span>
     </button>
   </div>
   <div [hidden]="!showRegister2">

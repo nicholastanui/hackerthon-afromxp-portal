@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AfroMxpComponent implements OnInit {
 public showGetStarted = true;
 public showPreRegTerms = false;
-public showRegister1 = false;
+public showPhoneInput = false;
+public showOTPInput = false;
 public showRegister2 = false;
 public showConfirm = false;
 public showActivationSuccess = false;
