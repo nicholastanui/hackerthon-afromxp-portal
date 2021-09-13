@@ -1,28 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Campaign} from "../model/campaign";
-import {IntegrationService} from "../service/integration.service";
-import {Subscription} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-afro-mxp',
   templateUrl: './afro-mxp.component.html',
   styleUrls: ['./afro-mxp.component.css']
 })
-export class AfroMxpComponent implements OnInit, OnDestroy {
+export class AfroMxpComponent implements OnInit {
 public showGetStarted = true;
-
-
-private subscriptions: Subscription[] = [];
-
-
-  constructor(private integration: IntegrationService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  // public onSubmitCampaign
+  public routeToCampaign() {
+    this.router.navigateByUrl('/page/campaigner');
+  }
 
-  ngOnDestroy(): void {
+  public routeToContributor() {
+    this.router.navigateByUrl('/page/contributor');
   }
 
 }
