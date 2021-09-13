@@ -8,11 +8,11 @@
     <li>Condition 5</li>
   </ul>
   <div class="card-container">
-    <button class="card card-small" tabindex="0">
+    <button class="card card-small" tabindex="0" (click)="displayPhoneInput()">
       <span>Agree</span>
     </button>
 
-    <button class="card card-small"  tabindex="0">
+    <button class="card card-small" tabindex="0" (click)="routeToBeginPage()">
       <span>Disagree</span>
     </button>
   </div>
@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <button class="card card-small"tabindex="0">
+  <button class="card card-small" tabindex="0" (click)="displayOTPInput()">
     <span>Next</span>
   </button>
 </div>
@@ -49,72 +49,76 @@
       </div>
     </div>
   </div>
-  <button class="card card-small" tabindex="0">
+  <button class="card card-small" tabindex="0" (click)="displayRegForm()">
     <span>Verify</span>
   </button>
-  <button class="card card-small"  tabindex="0">
+  <button class="card card-small" tabindex="0">
     <span>Resend OTP</span>
   </button>
 </div>
-<div [hidden]="!showRegister2">
-  <h3>Continue Campaign Registration</h3>
-  <form>
-    <div class="wrapper">
-      <div class="form">
-        <div class="inputfield">
-          <label>Campaign Name</label>
-          <input type="text" class="input" name="campaignName">
-        </div>
-        <div class="inputfield">
-          <label>Campaign Type</label>
-          <div class="custom_select">
-            <select>
-              <option value="">Select</option>
-              <option value="female">Education Fund</option>
-              <option value="female">Wedding Fund</option>
-              <option value="male">Medical Fund</option>
-              <option value="female">Funeral Fund</option>
-            </select>
+<div [hidden]="!showRegForm">
+  <h3>Campaign Application</h3>
+  <form #campaignerForm="ngForm" (ngSubmit)="submitCampaignerForm(campaignerForm.value)">
+    <div [hidden]="!showRegFormWrapper">
+      <div class="wrapper">
+        <div class="form">
+          <div class="inputfield">
+            <label>Campaign Name</label>
+            <input type="text" class="input" name="campaignName" ngModel #campaignNameInput="ngModel">
+          </div>
+          <div class="inputfield">
+            <label>Campaign Type</label>
+            <div class="custom_select">
+              <select>
+                <option value="">Select</option>
+                <option value="female">Education Fund</option>
+                <option value="female">Wedding Fund</option>
+                <option value="male">Medical Fund</option>
+                <option value="female">Funeral Fund</option>
+              </select>
+            </div>
+          </div>
+          <div class="inputfield">
+            <label>Target Amount</label>
+            <input type="number" class="input" name="targetAmount" ngModel #targetAmountInput="ngModel">
+          </div>
+          <div class="inputfield">
+            <label>Campaign Start Date</label>
+            <input type="date" class="input" name="startDate" ngModel #startDateInput="ngModel">
+          </div>
+          <div class="inputfield">
+            <label>Campaign End Date</label>
+            <input type="date" class="input" name="endDate" ngModel #endDateInput="ngModel">
           </div>
         </div>
-        <div class="inputfield">
-          <label>Target Amount</label>
-          <input type="number" class="input" name="targetAmount">
-        </div>
-        <div class="inputfield">
-          <label>Campaign Start Date</label>
-          <input type="date" class="input" name="startDate">
-        </div>
-        <div class="inputfield">
-          <label>Campaign End Date</label>
-          <input type="date" class="input" name="endDate">
-        </div>
       </div>
+      <button class="card card-small" type="button" tabindex="0" (click)="displayConfirmPage()">
+        <span>Complete</span>
+      </button>
     </div>
-    <button class="card card-small" type="submit" tabindex="0">
-      <span>Complete</span>
-    </button>
+    <div [hidden]="!showConfirm">
+      <h5>Confirm Details</h5>
+      <ul>
+        <li>First Name:</li>
+        <li>Last Name:</li>
+        <li>Phone Number:</li>
+        <li>Campaign Name:</li>
+        <li>Campaign Type:</li>
+        <li>Target Amount:</li>
+        <li>Start Date:</li>
+        <li>End Date:</li>
+      </ul>
+      <button [disabled]="campaignerForm.invalid || showLoading" type="submit" class="card card-small" tabindex="0">
+        <span [hidden]="!showLoading">Please wait...</span>
+        <span [hidden]="showLoading">Confirm</span>
+      </button>
+      <button [hidden]="showLoading" class="card card-small" tabindex="0" (click)="cancelRegistration()">
+        <span>Cancel</span>
+      </button>
+    </div>
   </form>
 </div>
-<div [hidden]="!showConfirm">
-  <h3>Confirm Registration Details</h3>
-  <ul>
-    <li>First Name: </li>
-    <li>Last Name: </li>
-    <li>Phone Number: </li>
-    <li>Campaign Name: </li>
-    <li>Campaign Type: </li>
-    <li>Target Amount: </li>
-    <li>Start Date: </li>
-    <li>End Date: </li>
-  </ul>
-  <button class="card card-small" tabindex="0">
-    <span>Confirm</span>
-  </button>
-  <button class="card card-small"  tabindex="0">
-    <span>Cancel</span>
-  </button>
-</div>
+
 <div [hidden]="!showActivationSuccess">
 </div>
 <div [hidden]="!showActivationFailed">

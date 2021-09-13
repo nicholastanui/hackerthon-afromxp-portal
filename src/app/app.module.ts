@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { CampaignerComponent } from './campaigner/campaigner.component';
 import { ContributorComponent } from './contributor/contributor.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,11 +18,12 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
     ContributorComponent,
     AppLayoutComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
