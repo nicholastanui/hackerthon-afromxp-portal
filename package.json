@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "dev": "ng build --base-href /afro-mxp/",
+    "prod": "ng build --prod --base-href /afro-mxp/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

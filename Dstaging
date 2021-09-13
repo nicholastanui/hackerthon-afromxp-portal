@@ -1,0 +1,22 @@
+## STAGE 1: Build
+FROM node:14.16.1-alpine3.10 AS build
+MAINTAINER ntanui@safaricom.co.ke
+WORKDIR /afro-mxp
+COPY package*.json ./
+RUN apk add git
+RUN npm install --silent
+RUN npm audit fix
+COPY src .
+RUN npm run dev
+
+## STAGE 2: Run
+FROM nginx:1.18.0-alpine
+## Remove default nginx website
+COPY nginx/default.conf /etc/nginx/conf.d/
+COPY certs/privkey.pem /etc/nginx/conf.d/
+COPY certs/fullchain.pem /etc/nginx/conf.d/
+RUN rm -rf /usr/share/nginx/html/*
+## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
+COPY --from=build /afro-mxp/dist/afro-mxp /usr/share/nginx/html/afro-mxp
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
