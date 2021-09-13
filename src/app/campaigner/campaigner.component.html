@@ -8,7 +8,7 @@
     <li>Condition 5</li>
   </ul>
   <div class="card-container">
-    <button class="card card-small" tabindex="0" (click)="displayPhoneInput()">
+    <button class="card card-small" tabindex="0" (click)="displayRegForm()">
       <span>Agree</span>
     </button>
 
@@ -63,6 +63,10 @@
       <div class="wrapper">
         <div class="form">
           <div class="inputfield">
+            <label>Phone Number</label>
+            <input type="number" class="input" name="msisdn" ngModel #msisdnInput="ngModel">
+          </div>
+          <div class="inputfield">
             <label>Campaign Name</label>
             <input type="text" class="input" name="campaignName" ngModel #campaignNameInput="ngModel">
           </div>
@@ -99,8 +103,6 @@
     <div [hidden]="!showConfirm">
       <h5>Confirm Details</h5>
       <ul>
-        <li>First Name:</li>
-        <li>Last Name:</li>
         <li>Phone Number:</li>
         <li>Campaign Name:</li>
         <li>Campaign Type:</li>
