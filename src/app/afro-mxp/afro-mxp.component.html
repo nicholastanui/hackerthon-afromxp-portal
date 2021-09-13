@@ -108,41 +108,43 @@
   </div>
   <div [hidden]="!showRegister2">
     <h3>Continue Campaign Registration</h3>
-    <div class="wrapper">
-      <div class="form">
-        <div class="inputfield">
-          <label>Campaign Name</label>
-          <input type="text" class="input">
-        </div>
-        <div class="inputfield">
-          <label>Campaign Type</label>
-          <div class="custom_select">
-            <select>
-              <option value="">Select</option>
-              <option value="female">Education Fund</option>
-              <option value="female">Wedding Fund</option>
-              <option value="male">Medical Fund</option>
-              <option value="female">Funeral Fund</option>
-            </select>
+    <form>
+      <div class="wrapper">
+        <div class="form">
+          <div class="inputfield">
+            <label>Campaign Name</label>
+            <input type="text" class="input" name="campaignName">
+          </div>
+          <div class="inputfield">
+            <label>Campaign Type</label>
+            <div class="custom_select">
+              <select>
+                <option value="">Select</option>
+                <option value="female">Education Fund</option>
+                <option value="female">Wedding Fund</option>
+                <option value="male">Medical Fund</option>
+                <option value="female">Funeral Fund</option>
+              </select>
+            </div>
+          </div>
+          <div class="inputfield">
+            <label>Target Amount</label>
+            <input type="number" class="input" name="targetAmount">
+          </div>
+          <div class="inputfield">
+            <label>Campaign Start Date</label>
+            <input type="date" class="input" name="startDate">
+          </div>
+          <div class="inputfield">
+            <label>Campaign End Date</label>
+            <input type="date" class="input" name="endDate">
           </div>
         </div>
-        <div class="inputfield">
-          <label>Target Amount</label>
-          <input type="number" class="input">
-        </div>
-        <div class="inputfield">
-          <label>Campaign Start Date</label>
-          <input type="date" class="input">
-        </div>
-        <div class="inputfield">
-          <label>Campaign End Date</label>
-          <input type="date" class="input">
-        </div>
       </div>
-    </div>
-    <button class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-      <span>Complete</span>
-    </button>
+      <button class="card card-small" type="submit" tabindex="0">
+        <span>Complete</span>
+      </button>
+    </form>
   </div>
   <div [hidden]="!showConfirm">
     <h3>Confirm Registration Details</h3>

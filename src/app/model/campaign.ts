@@ -8,6 +8,7 @@ export class Campaign {
   public start_date: Date;
   public end_date: Date;
 
+
   constructor(msisdn: number, first_name: string, last_name: string, campaign_name: string, type: string, target_amount: number, start_date: Date, end_date: Date) {
     this.msisdn = msisdn;
     this.first_name = first_name;
