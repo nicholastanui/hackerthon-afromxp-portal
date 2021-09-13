@@ -10,13 +10,7 @@ import {Subscription} from "rxjs";
 })
 export class AfroMxpComponent implements OnInit, OnDestroy {
 public showGetStarted = true;
-public showPreRegTerms = false;
-public showPhoneInput = false;
-public showOTPInput = false;
-public showRegister2 = false;
-public showConfirm = false;
-public showActivationSuccess = false;
-public showActivationFailed = false;
+
 
 private subscriptions: Subscription[] = [];
 
@@ -24,8 +18,6 @@ private subscriptions: Subscription[] = [];
   constructor(private integration: IntegrationService) { }
 
   ngOnInit(): void {
-    this.showGetStarted = false;
-    this.showPhoneInput = true;
   }
 
   // public onSubmitCampaign

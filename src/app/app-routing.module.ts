@@ -3,12 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import {CampaignerComponent} from "./campaigner/campaigner.component";
 import {ContributorComponent} from "./contributor/contributor.component";
 import {AfroMxpComponent} from "./afro-mxp/afro-mxp.component";
+import {AppLayoutComponent} from "./app-layout/app-layout.component";
 
 const routes: Routes = [
-  { path: 'begin', component: AfroMxpComponent },
-  { path: 'campaigner', component: CampaignerComponent },
-  { path: 'contributor', component: ContributorComponent },
-  { path: '**', redirectTo: '/begin', pathMatch: 'full' }
+  {
+    path: '',
+    redirectTo: '/page/begin',
+    pathMatch: 'full',
+  },
+  {
+    path: 'page',
+    component: AppLayoutComponent,
+    children: [
+      { path: 'begin', component: AfroMxpComponent },
+      { path: 'campaigner', component: CampaignerComponent },
+      { path: 'contributor', component: ContributorComponent }
+    ]
+  },
+  { path: '**', redirectTo: '/page/begin', pathMatch: 'full' }
 ];
 
 @NgModule({
