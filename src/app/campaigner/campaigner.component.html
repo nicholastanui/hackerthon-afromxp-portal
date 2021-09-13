@@ -58,7 +58,7 @@
 </div>
 <div [hidden]="!showRegForm">
   <h3>Campaign Application</h3>
-  <form #campaignerForm="ngForm" (ngSubmit)="submitCampaignerForm(campaignerForm.value)">
+  <form #campaignerForm="ngForm" (ngSubmit)="submitCampaignerForm(campaignerForm)">
     <div [hidden]="!showRegFormWrapper">
       <div class="wrapper">
         <div class="form">
@@ -75,10 +75,10 @@
             <div class="custom_select">
               <select>
                 <option value="">Select</option>
-                <option value="female">Education Fund</option>
-                <option value="female">Wedding Fund</option>
-                <option value="male">Medical Fund</option>
-                <option value="female">Funeral Fund</option>
+                <option value="Education Fund">Education Fund</option>
+                <option value="Wedding Fund">Wedding Fund</option>
+                <option value="Medical Fund">Medical Fund</option>
+                <option value="Funeral Fund">Funeral Fund</option>
               </select>
             </div>
           </div>

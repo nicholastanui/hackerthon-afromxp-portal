@@ -1,6 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {NotificationService} from "../service/notification.service";
+import {NotificationTypeEnum} from "../enum/notification-type.enum";
+import {Campaign} from "../model/campaign";
+import {IntegrationService} from "../service/integration.service";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-campaigner',
@@ -19,7 +26,12 @@ export class CampaignerComponent implements OnInit, OnDestroy {
   public showActivationFailed = false;
   private subscriptions: Subscription[] = [];
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private notification: NotificationService,
+    private integrations: IntegrationService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
     this.displayTermsPage();
@@ -33,12 +45,34 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/page/begin');
   }
 
-  public submitCampaignerForm(value: any) {
-    console.log(JSON.stringify(value));
+  public submitCampaignerForm(applicationForm: NgForm): void {
+    const formData = this.userService.createCampaignerFormData(applicationForm.value)
+    console.log(JSON.stringify(formData));
+    this.showLoading = true;
+    // this.notification.showNotification(NotificationTypeEnum.ERROR, 'This is awesome');
     this.subscriptions.push(
-      //TODO:
+      this.integrations.submitCampaign(formData).subscribe(
+        (response) => {
+          this.showLoading = false;
+          applicationForm.resetForm();
+          this.sendNotification(NotificationTypeEnum.SUCCESS, `${JSON.stringify(response)}`);
+        },
+        (errorResponse: HttpErrorResponse) => {
+          console.log(errorResponse);
+          this.sendNotification(NotificationTypeEnum.ERROR, errorResponse.error.message);
+          this.showLoading = false;
+        }
+      )
     );
 
+  }
+
+  private sendNotification(notificationType: NotificationTypeEnum, message: string): void {
+    if (message) {
+      this.notification.showNotification(notificationType, message);
+    } else {
+      this.notification.showNotification(notificationType, 'An error has occurred. Please try again');
+    }
   }
 
   public cancelRegistration() {
