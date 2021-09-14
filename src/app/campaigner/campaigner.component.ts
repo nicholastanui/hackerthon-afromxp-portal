@@ -6,7 +6,7 @@ import {NotificationTypeEnum} from "../enum/notification-type.enum";
 import {Campaign} from "../model/campaign";
 import {IntegrationService} from "../service/integration.service";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {UserService} from "../service/user.service";
 
 @Component({
@@ -24,14 +24,25 @@ export class CampaignerComponent implements OnInit, OnDestroy {
   public showConfirm = false;
   public showActivationSuccess = false;
   public showActivationFailed = false;
+  public applicationForm: FormGroup;
   private subscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
     private notification: NotificationService,
     private integrations: IntegrationService,
-    private userService: UserService
-    ) { }
+    private userService: UserService,
+    public fb: FormBuilder
+    ) {
+    this.applicationForm = this.fb.group({
+      msisdn: ['', [ Validators.required]],
+      campaignName: ['', [Validators.required]],
+      campaignType: ['', [Validators.required]],
+      targetAmount: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]]
+    })
+  }
 
   ngOnInit(): void {
     this.displayTermsPage();
@@ -41,15 +52,26 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.applicationForm.controls; }
+
   public routeToBeginPage() {
     this.router.navigateByUrl('/page/begin');
   }
 
   public submitCampaignerForm(applicationForm: NgForm): void {
-    const formData = this.userService.createCampaignerFormData(applicationForm.value)
-    console.log(JSON.stringify(formData));
+    if (this.applicationForm.invalid) {
+      return;
+    }
+    // const formData = this.userService.createCampaignerFormData(applicationForm.value)
     this.showLoading = true;
-    // this.notification.showNotification(NotificationTypeEnum.ERROR, 'This is awesome');
+    const formData = new FormData();
+    formData.append('msisdn', this.f.msisdn.value);
+    formData.append('campaign_name', this.f.campaignName.value);
+    formData.append('type', this.f.campaignType.value);
+    formData.append('target_amount', this.f.targetAmount.value);
+    formData.append('start_date', this.f.startDate.value);
+    formData.append('end_date', this.f.endDate.value);
     this.subscriptions.push(
       this.integrations.submitCampaign(formData).subscribe(
         (response) => {
