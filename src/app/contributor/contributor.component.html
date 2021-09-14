@@ -1,1 +1,68 @@
-<p>contributor works!</p>
+<div [hidden]="!showPreFundingTerms">
+  <h3>A few things to note before funding</h3>
+  <ul>
+    <li>Condition 1</li>
+    <li>Condition 2</li>
+    <li>Condition 3</li>
+    <li>Condition 4</li>
+    <li>Condition 5</li>
+  </ul>
+  <div class="card-container">
+    <button class="card card-small" tabindex="0" (click)="displayFunding()">
+      <span>Proceed</span>
+    </button>
+    <button class="card card-small" tabindex="0" (click)="routeToBeginPage()">
+      <span>Cancel</span>
+    </button>
+  </div>
+</div>
+<div [hidden]="!showFundingForm">
+  <h3>Payments</h3>
+  <form [formGroup]="fundingForm" (ngSubmit)="submitFunding()">
+    <div [hidden]="!showFundingFormWrapper">
+      <div class="wrapper">
+        <div class="form">
+          <div class="inputfield">
+            <label>Phone Number</label>
+            <input type="number" class="input" name="msisdn" formControlName="msisdn">
+          </div>
+          <div class="inputfield">
+            <label>Amount</label>
+            <input type="number" class="input" name="amount" formControlName="amount">
+          </div>
+        </div>
+      </div>
+      <button class="card card-small" type="button" tabindex="0" (click)="displaySTKAlert()">
+        <span>Contribute</span>
+      </button>
+    </div>
+    <div [hidden]="!showPreSTKAlert">
+      <h5>This will send an STK push to your phone. Confirm to proceed.</h5>
+      <button [disabled]="showLoading" type="submit" class="card card-small" tabindex="0">
+        <span [hidden]="!showLoading">Please wait...</span>
+        <span [hidden]="showLoading">Confirm</span>
+      </button>
+      <button [hidden]="showLoading" type="button" class="card card-small" tabindex="0" (click)="closeSession()">
+        <span>Cancel</span>
+      </button>
+    </div>
+  </form>
+</div>
+<div [hidden]="!showSuccessFunding">
+  <h3>SUCCESS!</h3>
+  <h5>Your contribution has been successfully sent.</h5>
+  <div class="card-container">
+    <button class="card card-small" tabindex="0" (click)="closeSession()">
+      <span>OK</span>
+    </button>
+  </div>
+</div>
+<div [hidden]="!showFailedFunding">
+  <h3>FAILED!</h3>
+  <h5>Sorry.We encountered a problem while charging your account. Please try again later</h5>
+  <div class="card-container">
+    <button class="card card-small" tabindex="0" (click)="closeSession()">
+      <span>OK</span>
+    </button>
+  </div>
+</div>

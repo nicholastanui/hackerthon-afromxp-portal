@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "update": "ng update @angular/cli --migrate-only --from=1.7.4",
     "dev": "ng build --base-href /afro-mxp/",
     "prod": "ng build --prod --base-href /afro-mxp/",
     "watch": "ng build --watch --configuration development",
