@@ -60,7 +60,7 @@ export class ContributorComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       this.integrations.submitFunding(formData).subscribe(
-        (response: HttpResponse<CallbackModel>) => {
+        (response: CallbackModel) => {
           this.showLoading = false;
           console.log(JSON.stringify(response));
           this.sendNotification(NotificationTypeEnum.SUCCESS, JSON.stringify(response.body));

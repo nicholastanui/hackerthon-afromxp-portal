@@ -4,5 +4,5 @@ export interface CallbackModel {
 }
 
 interface Header {
-  responseCode: number;
+  responseCode: string;
 }

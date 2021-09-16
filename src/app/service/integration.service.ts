@@ -12,12 +12,12 @@ export class IntegrationService {
 
   constructor(private http: HttpClient) { }
 
-  public submitCampaign(formData: FormData): Observable<HttpResponse<CallbackModel>> {
-    return this.http.post<HttpResponse<CallbackModel>>(`${this.host}/addcampaign`, formData);
+  public submitCampaign(formData: FormData): Observable<CallbackModel> {
+    return this.http.post<CallbackModel>(`${this.host}/addcampaign`, formData);
   }
 
-  public submitFunding(fundData: FormData): Observable<HttpResponse<CallbackModel>> {
-    return this.http.post<HttpResponse<CallbackModel>>(`${this.host}/makepayment`, fundData);
+  public submitFunding(fundData: FormData): Observable<CallbackModel> {
+    return this.http.post<CallbackModel>(`${this.host}/makepayment`, fundData);
   }
 
 }

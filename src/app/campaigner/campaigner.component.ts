@@ -8,6 +8,7 @@ import {IntegrationService} from "../service/integration.service";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {UserService} from "../service/user.service";
+import {CallbackModel} from "../model/callback.model";
 
 @Component({
   selector: 'app-campaigner',
@@ -24,6 +25,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
   public showConfirm = false;
   public showActivationSuccess = false;
   public showActivationFailed = false;
+  public campaignId: any = '';
   public applicationForm: FormGroup;
   private subscriptions: Subscription[] = [];
 
@@ -59,7 +61,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/page/begin');
   }
 
-  public submitCampaignerForm(applicationForm: NgForm): void {
+  public submitCampaignerForm(): void {
     if (this.applicationForm.invalid) {
       return;
     }
@@ -74,10 +76,16 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     formData.append('end_date', this.f.endDate.value);
     this.subscriptions.push(
       this.integrations.submitCampaign(formData).subscribe(
-        (response) => {
+        (response:CallbackModel) => {
           this.showLoading = false;
-          applicationForm.resetForm();
-          this.sendNotification(NotificationTypeEnum.SUCCESS, `${JSON.stringify(response)}`);
+          const responseCode = response.header.responseCode;
+          if (responseCode === '201') {
+            this.campaignId = response.body?.campaign_id;
+            this.displaySuccessRegPage();
+            this.sendNotification(NotificationTypeEnum.SUCCESS, `Campaign created`);
+          } else {
+            this.sendNotification(NotificationTypeEnum.ERROR, `An error has occurred. Please try again`);
+          }
         },
         (errorResponse: HttpErrorResponse) => {
           console.log(errorResponse);

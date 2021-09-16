@@ -29,7 +29,7 @@ import {HttpHeadersInterceptor} from "./interceptors/httpHeaders.interceptor";
         ReactiveFormsModule
     ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true}
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -58,22 +58,22 @@
 </div>
 <div [hidden]="!showRegForm">
   <h3>Campaign Application</h3>
-  <form #campaignerForm="ngForm" (ngSubmit)="submitCampaignerForm(campaignerForm)">
+  <form [formGroup]="applicationForm" (ngSubmit)="submitCampaignerForm()">
     <div [hidden]="!showRegFormWrapper">
       <div class="wrapper">
         <div class="form">
           <div class="inputfield">
             <label>Phone Number</label>
-            <input type="number" class="input" name="msisdn" ngModel #msisdnInput="ngModel">
+            <input type="number" class="input" name="msisdn" formControlName="msisdn">
           </div>
           <div class="inputfield">
             <label>Campaign Name</label>
-            <input type="text" class="input" name="campaignName" ngModel #campaignNameInput="ngModel">
+            <input type="text" class="input" name="campaignName" formControlName="campaignName">
           </div>
           <div class="inputfield">
             <label>Campaign Type</label>
             <div class="custom_select">
-              <select>
+              <select formControlName="campaignType">
                 <option value="">Select</option>
                 <option value="Education Fund">Education Fund</option>
                 <option value="Wedding Fund">Wedding Fund</option>
@@ -84,15 +84,15 @@
           </div>
           <div class="inputfield">
             <label>Target Amount</label>
-            <input type="number" class="input" name="targetAmount" ngModel #targetAmountInput="ngModel">
+            <input type="number" class="input" name="targetAmount" formControlName="targetAmount">
           </div>
           <div class="inputfield">
             <label>Campaign Start Date</label>
-            <input type="date" class="input" name="startDate" ngModel #startDateInput="ngModel">
+            <input type="date" class="input" name="startDate" formControlName="startDate">
           </div>
           <div class="inputfield">
             <label>Campaign End Date</label>
-            <input type="date" class="input" name="endDate" ngModel #endDateInput="ngModel">
+            <input type="date" class="input" name="endDate" formControlName="endDate">
           </div>
         </div>
       </div>
@@ -103,25 +103,31 @@
     <div [hidden]="!showConfirm">
       <h5>Confirm Details</h5>
       <ul>
-        <li>Phone Number:</li>
-        <li>Campaign Name:</li>
-        <li>Campaign Type:</li>
-        <li>Target Amount:</li>
-        <li>Start Date:</li>
-        <li>End Date:</li>
+        <li>Phone Number: {{f.msisdn.value}}</li>
+        <li>Campaign Name: {{f.campaignName.value}}</li>
+        <li>Campaign Type: {{f.campaignType.value}}</li>
+        <li>Target Amount: {{f.targetAmount.value}}</li>
+        <li>Start Date: {{f.startDate.value}}</li>
+        <li>End Date: {{f.endDate.value}}</li>
       </ul>
-      <button [disabled]="campaignerForm.invalid || showLoading" type="submit" class="card card-small" tabindex="0">
+      <button [disabled]="applicationForm.invalid || showLoading" type="submit" class="card card-small" tabindex="0">
         <span [hidden]="!showLoading">Please wait...</span>
         <span [hidden]="showLoading">Confirm</span>
       </button>
       <button [hidden]="showLoading" type="button" class="card card-small" tabindex="0" (click)="cancelRegistration()">
-        <span>Cancel</span>
+        <span>Edit</span>
       </button>
     </div>
   </form>
 </div>
 
 <div [hidden]="!showActivationSuccess">
+  <div class="card highlight-card card-small">
+    <h2>Campaign Created!</h2>
+  </div>
+  <h4>Share with potential contributors:</h4>
+  <h5>Your Campaign ID: <small>{{campaignId}}</small></h5>
+  <h5>Or copy and share this url: <small>http://104.248.59.79:9000/afro-mxp/page/contributor/campaign-id/{{campaignId}}</small></h5>
 </div>
 <div [hidden]="!showActivationFailed">
 </div>
