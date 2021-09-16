@@ -78,11 +78,11 @@ export class CampaignerComponent implements OnInit, OnDestroy {
       this.integrations.submitCampaign(formData).subscribe(
         (response:CallbackModel) => {
           this.showLoading = false;
-          const responseCode = response.header.responseCode;
+          const responseCode = response.header?.responseCode;
           if (responseCode === '201') {
             this.campaignId = response.body?.campaign_id;
-            this.displaySuccessRegPage();
             this.sendNotification(NotificationTypeEnum.SUCCESS, `Campaign created`);
+            this.displaySuccessRegPage();
           } else {
             this.sendNotification(NotificationTypeEnum.ERROR, `An error has occurred. Please try again`);
           }
