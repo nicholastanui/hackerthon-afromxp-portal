@@ -76,15 +76,16 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     formData.append('end_date', this.f.endDate.value);
     this.subscriptions.push(
       this.integrations.submitCampaign(formData).subscribe(
-        (response:CallbackModel) => {
+        (response:CallbackModel[]) => {
           this.showLoading = false;
-          const responseCode = response.header?.responseCode;
+          const responseCode = response[0].header?.responseCode;
           if (responseCode === '201') {
-            this.campaignId = response.body?.campaign_id;
+            this.campaignId = response[0].body?.campaign_id;
             this.sendNotification(NotificationTypeEnum.SUCCESS, `Campaign created`);
             this.displaySuccessRegPage();
           } else {
             this.sendNotification(NotificationTypeEnum.ERROR, `An error has occurred. Please try again`);
+            this.displayFailedRegPage();
           }
         },
         (errorResponse: HttpErrorResponse) => {

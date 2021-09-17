@@ -11,10 +11,10 @@ import {NotificationTypeEnum} from "../enum/notification-type.enum";
 
 @Component({
   selector: 'app-contributor',
-  templateUrl: './contributor.component.html',
-  styleUrls: ['./contributor.component.css']
+  templateUrl: './contributor-home.component.html',
+  styleUrls: ['./contributor-home.component.css']
 })
-export class ContributorComponent implements OnInit, OnDestroy {
+export class ContributorHome implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public showLoading = false;
   public showPreFundingTerms = false;
@@ -60,10 +60,10 @@ export class ContributorComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       this.integrations.submitFunding(formData).subscribe(
-        (response: CallbackModel) => {
+        (response: CallbackModel[]) => {
           this.showLoading = false;
           console.log(JSON.stringify(response));
-          this.sendNotification(NotificationTypeEnum.SUCCESS, JSON.stringify(response.body));
+          this.sendNotification(NotificationTypeEnum.SUCCESS, JSON.stringify(response[0].body));
         },
         (errorResponse: HttpErrorResponse) => {
           this.displayFailedTXN();

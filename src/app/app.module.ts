@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {AfroMxpComponent} from './afro-mxp/afro-mxp.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CampaignerComponent} from './campaigner/campaigner.component';
-import {ContributorComponent} from './contributor/contributor.component';
+import {ContributorHome} from './contributor/contributor-home.component';
 import {AppLayoutComponent} from './app-layout/app-layout.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NotificationModule} from "./notification.module";
@@ -17,7 +17,7 @@ import {HttpHeadersInterceptor} from "./interceptors/httpHeaders.interceptor";
     AppComponent,
     AfroMxpComponent,
     CampaignerComponent,
-    ContributorComponent,
+    ContributorHome,
     AppLayoutComponent
   ],
     imports: [
