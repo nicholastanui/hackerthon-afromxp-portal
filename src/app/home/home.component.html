@@ -1,0 +1,42 @@
+  <!-- Highlight Card -->
+  <div class="card highlight-card card-small">
+    <h2>Afro MXP</h2>
+  </div>
+
+  <p>AfroMXP is the one-stop crowd funding app for the continent</p>
+
+  <h1>Get Started</h1>
+
+  <input type="hidden" #selection>
+  <div class="card-container">
+    <div [hidden]="!showGetStarted">
+      <button class="card card-small" tabindex="0" (click)="routeToCampaign()">
+        <!--      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>-->
+        <span>Create Campaign</span>
+      </button>
+
+      <button class="card card-small" tabindex="0" (click)="routeToContributor()">
+        <!--      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>-->
+        <span>Fund a Campaign</span>
+      </button>
+    </div>
+    <div [hidden]="!showFundOption">
+        <h3>Enter Campaign Code</h3>
+        <form #campaignCodeForm="ngForm" (ngSubmit)="getCampaign(campaignCodeForm.value)">
+          <div class="wrapper">
+            <div class="form">
+              <div class="inputfield">
+                <label>Campaign Code</label>
+                <input type="number" class="input" name="campaignId" ngModel required>
+              </div>
+            </div>
+          </div>
+          <button [disabled]="showLoading || !campaignCodeForm.valid" type="submit" class="card card-small" tabindex="0">
+            <span [hidden]="!showLoading">Please wait...</span>
+            <span [hidden]="showLoading">Fund</span>
+          </button>
+        </form>
+    </div>
+
+  </div>
+

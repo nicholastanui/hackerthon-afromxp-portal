@@ -3,7 +3,6 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {NotificationService} from "../service/notification.service";
 import {NotificationTypeEnum} from "../enum/notification-type.enum";
-import {Campaign} from "../model/campaign";
 import {IntegrationService} from "../service/integration.service";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
@@ -75,12 +74,12 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     formData.append('start_date', this.f.startDate.value);
     formData.append('end_date', this.f.endDate.value);
     this.subscriptions.push(
-      this.integrations.submitCampaign(formData).subscribe(
+      this.integrations.addCampaign(formData).subscribe(
         (response:CallbackModel[]) => {
           this.showLoading = false;
-          const responseCode = response[0].header?.responseCode;
-          if (responseCode === '201') {
-            this.campaignId = response[0].body?.campaign_id;
+          const responseCode = parseInt(response[0].header?.responseCode);
+          if (responseCode === 201) {
+            this.campaignId = response[0].body?.data;
             this.sendNotification(NotificationTypeEnum.SUCCESS, `Campaign created`);
             this.displaySuccessRegPage();
           } else {

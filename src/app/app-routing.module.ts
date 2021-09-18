@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {CampaignerComponent} from "./campaigner/campaigner.component";
-import {ContributorHome} from "./contributor/contributor-home.component";
-import {AfroMxpComponent} from "./afro-mxp/afro-mxp.component";
+import {ContributorHomeComponent} from "./contributor/contributor-home.component";
+import {HomeComponent} from "./home/home.component";
 import {AppLayoutComponent} from "./app-layout/app-layout.component";
+import {ContributeComponent} from "./contribute/contribute.component";
 
 const routes: Routes = [
   {
@@ -15,10 +16,10 @@ const routes: Routes = [
     path: 'page',
     component: AppLayoutComponent,
     children: [
-      { path: 'begin', component: AfroMxpComponent },
+      { path: 'begin', component: HomeComponent },
       { path: 'campaigner', component: CampaignerComponent },
-      { path: 'contributor', component: ContributorHome },
-      { path: 'contributor/id', component: ContributorHome }
+      { path: 'contributor', component: ContributorHomeComponent },
+      { path: 'fund/:id', component: ContributeComponent }
     ]
   },
   { path: '**', redirectTo: '/page/begin', pathMatch: 'full' }

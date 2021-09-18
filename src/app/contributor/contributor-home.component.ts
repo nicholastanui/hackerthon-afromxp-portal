@@ -14,7 +14,7 @@ import {NotificationTypeEnum} from "../enum/notification-type.enum";
   templateUrl: './contributor-home.component.html',
   styleUrls: ['./contributor-home.component.css']
 })
-export class ContributorHome implements OnInit, OnDestroy {
+export class ContributorHomeComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public showLoading = false;
   public showPreFundingTerms = false;
@@ -59,7 +59,7 @@ export class ContributorHome implements OnInit, OnDestroy {
     formData.append("campaign_id", '1');
 
     this.subscriptions.push(
-      this.integrations.submitFunding(formData).subscribe(
+      this.integrations.makePayment(formData).subscribe(
         (response: CallbackModel[]) => {
           this.showLoading = false;
           console.log(JSON.stringify(response));
