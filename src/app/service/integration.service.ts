@@ -21,8 +21,17 @@ export class IntegrationService {
     return this.http.get<CallbackModel>(`${this.host}/getcampaign/${campaignId}`);
   }
 
+  public getReport(campaignId: string): Observable<CallbackModel> {
+    return this.http.get<CallbackModel>(`${this.host}/getreport/${campaignId}`);
+  }
+
+
   public makePayment(fundData: FormData): Observable<CallbackModel[]> {
     return this.http.post<CallbackModel[]>(`${this.host}/makepayment`, fundData);
+  }
+
+  public trackPayment(trackData: FormData): Observable<CallbackModel> {
+    return this.http.post<CallbackModel>(`${this.host}/trackpayment`, trackData);
   }
 
   public paymentStatus(data: FormData): Observable<CallbackModel[]> {

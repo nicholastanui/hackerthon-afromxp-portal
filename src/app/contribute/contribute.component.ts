@@ -102,6 +102,7 @@ export class ContributeComponent implements OnInit {
             if (this.campaignId != null) {
               formData.append("campaign_id", this.campaignId);
             }
+            this.integrations.trackPayment(formData);
             return formData;
           })
         )

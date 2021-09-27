@@ -40,13 +40,12 @@ export class CampaignerComponent implements OnInit, OnDestroy {
       campaignName: ['', [Validators.required]],
       campaignType: ['', [Validators.required]],
       targetAmount: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]]
+      campaignDuration: ['', [Validators.required]]
     })
   }
 
   ngOnInit(): void {
-    this.displayTermsPage();
+    this.displayRegForm();
   }
 
   ngOnDestroy(): void {
@@ -71,8 +70,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     formData.append('campaign_name', this.f.campaignName.value);
     formData.append('type', this.f.campaignType.value);
     formData.append('target_amount', this.f.targetAmount.value);
-    formData.append('start_date', this.f.startDate.value);
-    formData.append('end_date', this.f.endDate.value);
+    formData.append('period', this.f.campaignDuration.value);
     this.subscriptions.push(
       this.integrations.addCampaign(formData).subscribe(
         (response:CallbackModel[]) => {
