@@ -4,11 +4,11 @@ import {NgModule} from "@angular/core";
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
-      position: 'left',
+      position: 'middle',
       distance: 150
     },
     vertical: {
-      position: 'bottom',
+      position: 'top',
       distance: 12,
       gap: 10
     }
@@ -24,7 +24,7 @@ const customNotifierOptions: NotifierOptions = {
   animations: {
     enabled: true,
     show: {
-      preset: 'slide',
+      preset: 'fade',
       speed: 300,
       easing: 'ease'
     },

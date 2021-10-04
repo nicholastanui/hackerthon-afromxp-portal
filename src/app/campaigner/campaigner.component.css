@@ -1,1 +1,21 @@
+.fa {
+  padding: 0;
+  font-size: 25px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 10px;
+  border: none;
+}
 
+.fa-whatsapp {
+  background: #25d366;
+  border-radius: 50%;
+  color: white;
+}
+
+.fa-copy {
+  background: #FFFFFF;
+  color: #A0A0A0;
+}

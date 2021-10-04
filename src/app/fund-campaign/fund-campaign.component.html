@@ -1,0 +1,17 @@
+<div class="page">
+  <form #campaignCodeForm="ngForm" (ngSubmit)="getCampaign(campaignCodeForm.value)">
+    <div class="page-section">
+      <div class="form-row">
+        <div class="form-row-content">
+          <input class="inputArea" name="campaignId" type="number" placeholder="Enter Fund Code" ngModel required>
+        </div>
+      </div>
+      <div class="bottom">
+        <button [disabled]="showLoading || !campaignCodeForm.valid" type="submit" class="sikapa-btn" tabindex="0">
+          <span [hidden]="!showLoading">Please wait...</span>
+          <span [hidden]="showLoading">Contribute</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

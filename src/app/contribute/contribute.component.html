@@ -1,55 +1,59 @@
 <div>
-  <div class="card highlight-card card-small">
-    <h2>{{pageTitle}}</h2>
-  </div>
+
   <div [hidden]="!showLobbyRoomPage">
-    <h4>FUND DETAILS</h4>
     <h5>Getting fund details...</h5>
   </div>
   <div [hidden]="!showCall2Action">
-    <h4>FUND DETAILS</h4>
-    <h5>Fund Name: {{campaignName}}</h5>
-    <h5>Fund Type: {{campaignType}}</h5>
-    <h5>Target Amount: {{targetAmount}}</h5>
-    <h5>Fund Status: {{campaignStatus}}</h5>
-    <hr>
-    <form #fundingForm="ngForm" (ngSubmit)="fundCampaign(fundingForm.value)">
-      <div [hidden]="!showFundingFormWrapper">
-        <div class="wrapper">
-          <div class="form">
-            <div class="inputfield">
-              <label>Phone Number</label>
-              <input type="number" class="input" name="msisdn" ngModel required>
-            </div>
-            <div class="inputfield">
-              <label>Amount</label>
-              <input type="number" class="input" name="amount" ngModel required>
+    <div class="info-outline">
+      <ul style="list-style-type: none; text-align: left">
+        <li>Fund Name: <span style="color: #A0A0A0">{{campaignName}}</span></li>
+        <li>Fund Type: <span style="color: #A0A0A0">{{campaignType}}</span></li>
+        <li>Target Amount: <span style="color: #A0A0A0">{{targetAmount | currency: 'KES'}}</span></li>
+      </ul>
+    </div>
+    <div class="info-outline">
+      <form #fundingForm="ngForm" (ngSubmit)="fundCampaign(fundingForm.value)">
+        <div [hidden]="!showFundingFormWrapper" style="align-content: center">
+          <div class="wrapper">
+            <div class="form">
+              <div class="inputfield">
+                <!--              <label>Phone Number</label>-->
+                <input type="number" class="input" name="msisdn" placeholder="Enter phone number" ngModel required>
+              </div>
+              <div class="inputfield">
+                <!--              <label>Amount</label>-->
+                <input type="number" class="input" name="amount" placeholder="Enter amount" ngModel required>
+              </div>
             </div>
           </div>
+          <button class="sikapa-btn" style="align-content: center" type="button" tabindex="0"
+                  (click)="displaySTKAlert()">
+            <span>Make Payment</span>
+          </button>
         </div>
-        <button class="card card-small" type="button" tabindex="0" (click)="displaySTKAlert()">
-          <span>Fund</span>
-        </button>
-      </div>
-      <div [hidden]="!showPreSTKAlert">
-        <h5>This will send an STK push to your phone. Confirm to proceed.</h5>
-        <button [disabled]="showLoading" type="submit" class="card card-small" tabindex="0">
-          <span [hidden]="!showLoading">Please wait...</span>
-          <span [hidden]="showLoading">OK</span>
-        </button>
-      </div>
-    </form>
+        <div [hidden]="!showPreSTKAlert" style="align-content: center">
+          <p>This will send an STK push to your phone. Confirm to proceed.</p>
+          <button class="sikapa-btn" [disabled]="showLoading" style="align-content: center" type="submit" tabindex="0">
+            <span [hidden]="!showLoading">Please wait...</span>
+            <span [hidden]="showLoading">OK</span>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div [hidden]="!showWaitCallback">
-    <h4>PAYMENT PROGRESS</h4>
-    <h5>Please wait for payment confirmation...</h5>
-  </div>
-  <div [hidden]="!showSuccessFunding">
-    <h4>PAYMENT PROGRESS</h4>
-    <h5>Your payment has been received. Thank you for your contribution.</h5>
-  </div>
-  <div [hidden]="!showFailedFunding">
-    <h4>PAYMENT PROGRESS</h4>
-    <h5>Sorry. The payment was not successfully processed. Please try again later.</h5>
+  <div class="info-outline">
+    <div [hidden]="!showWaitCallback">
+      <h5>PAYMENT PROGRESS</h5>
+      <p style="color: #A0A0A0">Please wait for payment confirmation...</p>
+    </div>
+    <div [hidden]="!showSuccessFunding">
+      <h5 style="color: #22BB33">PAYMENT COMPLETED!</h5>
+      <p style="color: #A0A0A0">Your payment has been received.</p>
+      <p style="color: #A0A0A0">Thank you for your contribution.</p>
+    </div>
+    <div [hidden]="!showFailedFunding">
+      <h5 style="color: #E60000">PAYMENT FAILED!</h5>
+      <p style="color: #A0A0A0">Sorry. The payment was not successfully processed. Please try again later.</p>
+    </div>
   </div>
 </div>

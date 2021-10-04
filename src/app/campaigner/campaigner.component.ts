@@ -4,10 +4,11 @@ import {Subscription} from "rxjs";
 import {NotificationService} from "../service/notification.service";
 import {NotificationTypeEnum} from "../enum/notification-type.enum";
 import {IntegrationService} from "../service/integration.service";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../service/user.service";
 import {CallbackModel} from "../model/callback.model";
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-campaigner',
@@ -17,6 +18,7 @@ import {CallbackModel} from "../model/callback.model";
 export class CampaignerComponent implements OnInit, OnDestroy {
   public showLoading = false;
   public showPreRegTerms = false;
+  public showPreRegOptions = false;
   public showPhoneInput = false;
   public showOTPInput = false;
   public showRegForm = false;
@@ -24,16 +26,21 @@ export class CampaignerComponent implements OnInit, OnDestroy {
   public showConfirm = false;
   public showActivationSuccess = false;
   public showActivationFailed = false;
-  public campaignId: any = '';
+  public campaignId: string = '';
+  public referUrl: string = '';
   public applicationForm: FormGroup;
+  public baseUrl = 'http://104.248.59.79:9000/afro-mxp/page/fund/';
+  public whatsAppUrl = 'https://wa.me/?text=';
   private subscriptions: Subscription[] = [];
+
 
   constructor(
     private router: Router,
     private notification: NotificationService,
     private integrations: IntegrationService,
     private userService: UserService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private clipboard: Clipboard
     ) {
     this.applicationForm = this.fb.group({
       msisdn: ['', [ Validators.required]],
@@ -46,6 +53,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.displayRegForm();
+    // this.displayPreRegOptions();
   }
 
   ngOnDestroy(): void {
@@ -78,6 +86,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
           const responseCode = parseInt(response[0].header?.responseCode);
           if (responseCode === 201) {
             this.campaignId = response[0].body?.data;
+            this.referUrl = this.baseUrl+this.campaignId;
             this.sendNotification(NotificationTypeEnum.SUCCESS, `Campaign created`);
             this.displaySuccessRegPage();
           } else {
@@ -107,6 +116,28 @@ export class CampaignerComponent implements OnInit, OnDestroy {
 
     this.displayRegForm()
   }
+  public copyUrl() {
+    const copied: boolean = this.clipboard.copy(this.referUrl);
+    if (copied) {
+      this.notification.showNotification(NotificationTypeEnum.INFO, "Link Copied!")
+    }
+  }
+
+  public copyCampaignCode() {
+    const copied: boolean = this.clipboard.copy(this.campaignId);
+    if (copied) {
+      this.notification.showNotification(NotificationTypeEnum.INFO, "Copied!")
+    }
+  }
+
+  public shareUrlViaWhatsApp() {
+    const url = this.whatsAppUrl+this.referUrl
+    window.open(url, "_blank");
+  }
+
+  public shareCodeViaWhatsApp() {
+    window.open(this.campaignId, "_blank");
+  }
 
   public displayTermsPage() {
     this.showPreRegTerms = true;
@@ -135,7 +166,20 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.showActivationSuccess = false;
     this.showActivationFailed = false;
   }
+
+  public displayPreRegOptions() {
+    this.showPreRegOptions = true;
+    this.showPreRegTerms = false;
+    this.showPhoneInput = false;
+    this.showOTPInput = false;
+    this.showRegForm = false;
+    this.showRegFormWrapper = false;
+    this.showConfirm = false;
+    this.showActivationSuccess = false;
+    this.showActivationFailed = false;
+  }
   public displayRegForm() {
+    this.showPreRegOptions = false;
     this.showPreRegTerms = false;
     this.showPhoneInput = false;
     this.showOTPInput = false;
@@ -146,6 +190,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.showActivationFailed = false;
   }
   public displayConfirmPage() {
+    this.showPreRegOptions = false;
     this.showPreRegTerms = false;
     this.showPhoneInput = false;
     this.showOTPInput = false;
@@ -156,6 +201,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.showActivationFailed = false;
   }
   public displaySuccessRegPage() {
+    this.showPreRegOptions = false;
     this.showPreRegTerms = false;
     this.showPhoneInput = false;
     this.showOTPInput = false;
@@ -165,6 +211,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
     this.showActivationFailed = false;
   }
   public displayFailedRegPage() {
+    this.showPreRegOptions = false;
     this.showPreRegTerms = false;
     this.showPhoneInput = false;
     this.showOTPInput = false;

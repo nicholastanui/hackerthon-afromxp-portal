@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CallbackModel} from "../model/callback.model";
-import {map, mergeMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +24,9 @@ export class IntegrationService {
     return this.http.get<CallbackModel>(`${this.host}/getreport/${campaignId}`);
   }
 
+  public myCampaigns(req: FormData): Observable<CallbackModel> {
+    return this.http.post<CallbackModel>(`${this.host}/mycampaigns`, req);
+  }
 
   public makePayment(fundData: FormData): Observable<CallbackModel[]> {
     return this.http.post<CallbackModel[]>(`${this.host}/makepayment`, fundData);
