@@ -11,9 +11,11 @@ RUN npm run dev
 ## STAGE 2: Run
 FROM nginx:1.18.0-alpine
 ## Remove default nginx website
-COPY nginx/default.conf /etc/nginx/conf.d/
-COPY certs/privkey.pem /etc/nginx/conf.d/
-COPY certs/fullchain.pem /etc/nginx/conf.d/
+RUN rm -rf /etc/nginx/conf.d/*
+COPY nginx/develop/afro-mxp.conf /etc/nginx/conf.d/
+COPY nginx/develop/afro-mxp.key.pem /etc/nginx/conf.d/
+COPY nginx/develop/afro-mxp.chained.crt /etc/nginx/conf.d/
+COPY nginx/develop/afro-mxp.dhparams.pem /etc/nginx/conf.d/
 RUN rm -rf /usr/share/nginx/html/*
 ## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
 COPY --from=build /afro-mxp/dist/afro-mxp /usr/share/nginx/html/afro-mxp
