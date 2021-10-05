@@ -1,0 +1,3 @@
+// file  .dockerignore
+node_modules
+dist
