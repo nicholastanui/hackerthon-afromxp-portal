@@ -1,13 +1,13 @@
 {
-  "name": "afro-mxp",
+  "name": "sikapa",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "update": "ng update @angular/cli --migrate-only --from=1.7.4",
-    "dev": "ng build --base-href /afro-mxp/",
-    "prod": "ng build --prod --base-href /afro-mxp/",
+    "dev": "ng build --base-href /sikapa/",
+    "prod": "ng build --prod --base-href /sikapa/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
