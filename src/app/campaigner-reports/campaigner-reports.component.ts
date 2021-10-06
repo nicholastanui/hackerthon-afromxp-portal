@@ -6,6 +6,7 @@ import {CallbackModel} from "../model/callback.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NotificationTypeEnum} from "../enum/notification-type.enum";
 import {MyCampaignModel} from "../model/myCampaign.model";
+import {ContributorsModel} from "../model/contributors.model";
 
 @Component({
   selector: 'app-campaigner-reports',
@@ -18,6 +19,7 @@ export class CampaignerReportsComponent implements OnInit, OnDestroy {
   public showPhoneNumber = false;
   public showCampaignList = false;
   public showReport = false
+  public showContributors = false
   public campaignList: MyCampaignModel[] = [];
   public campaignName = '';
   public campaignStart = '';
@@ -25,6 +27,8 @@ export class CampaignerReportsComponent implements OnInit, OnDestroy {
   public campaignDonationCount = '';
   public campaignTotalContributions = '';
   public campaignTargetContributions = '';
+  public contributors: ContributorsModel[] = [];
+  public isContributorsAvailable = false;
 
   constructor(
     private notification: NotificationService,
@@ -72,14 +76,27 @@ export class CampaignerReportsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.integrations.getReport(campaignId).subscribe(
         (response: CallbackModel) => {
-          const responseData = response.body.data;
-          if (responseData.id !== null) {
-            this.campaignName = responseData.campaign_name;
-            this.campaignStart = responseData.start_date;
-            this.campaignEnd = responseData.end_date;
-            this.campaignDonationCount = responseData.donations;
-            this.campaignTotalContributions = responseData.raised_amount;
-            this.campaignTargetContributions = responseData.target_amount;
+          this.contributors = [];
+          this.isContributorsAvailable = false;
+          const responseData = response.body.data[0];
+          if (responseData.summary[0].id !== null) {
+            this.campaignName = responseData.summary[0].campaign_name;
+            this.campaignStart = responseData.summary[0].start_date;
+            this.campaignEnd = responseData.summary[0].end_date;
+            this.campaignDonationCount = responseData.summary[0]?.donations;
+            this.campaignTotalContributions = responseData.summary[0]?.raised_amount;
+            this.campaignTargetContributions = responseData.summary[0]?.target;
+            if (responseData.contributions.length > 0) {
+              this.isContributorsAvailable = true;
+              responseData.contributions.forEach((contributor: ContributorsModel) => {
+                this.contributors.push(
+                  {
+                    amount: contributor.amount,
+                    msisdn: contributor.msisdn
+                  }
+                );
+              })
+            }
             this.renderReportPage();
           } else {
             this.notification.showNotification(NotificationTypeEnum.ERROR, "Code not Found");
@@ -97,17 +114,27 @@ export class CampaignerReportsComponent implements OnInit, OnDestroy {
     this.showPhoneNumber = true;
     this.showCampaignList = false;
     this.showReport = false
+    this.showContributors = false;
   }
 
   public renderCampaignListPage() {
     this.showPhoneNumber = false;
     this.showCampaignList = true;
     this.showReport = false
+    this.showContributors = false;
   }
 
   public renderReportPage() {
     this.showPhoneNumber = false;
     this.showCampaignList = false;
     this.showReport = true
+    this.showContributors = false;
+  }
+
+  public renderContributorsPage() {
+    this.showPhoneNumber = false;
+    this.showCampaignList = false;
+    this.showReport = false
+    this.showContributors = true;
   }
 }

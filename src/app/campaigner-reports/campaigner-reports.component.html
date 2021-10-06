@@ -1,4 +1,5 @@
 <div class="page">
+  <h5 style="color: #E60000">Campaign Details</h5>
   <form [hidden]="!showPhoneNumber" #campaignCodeForm="ngForm" (ngSubmit)="getCampaignLists(campaignCodeForm.value)">
     <div class="page-section">
       <div class="form-row">
@@ -9,31 +10,54 @@
       <div class="bottom">
         <button [disabled]="showLoading || !campaignCodeForm.valid" type="submit" class="sikapa-btn" tabindex="0">
           <span [hidden]="!showLoading">Please wait...</span>
-          <span [hidden]="showLoading">Contribute</span>
+          <span [hidden]="showLoading">View Campaign</span>
         </button>
       </div>
     </div>
   </form>
-  <div class="info-outline" [hidden]="!showCampaignList" *ngFor="let list of campaignList" (click)="getCampaignReport(list.campaignId)">
+  <div class="info-outline" [hidden]="!showCampaignList" *ngFor="let list of campaignList">
     <ul style="list-style-type: none; text-align: left">
       <li>Campaign Code: <span style="color: #A0A0A0">{{list.campaignId}}</span></li>
       <li>Campaign Name: <span style="color: #A0A0A0">{{list.campaignName}}</span></li>
       <li>Campaign Type: <span style="color: #A0A0A0">{{list.campaignType}}</span></li>
     </ul>
+    <div style="align-content: center">
+      <button class="sikapa-btn" type="button" style="align-content: center" tabindex="0"
+              (click)="getCampaignReport(list.campaignId)">
+        <span>Details</span>
+      </button>
+    </div>
   </div>
-
   <div class="info-outline" [hidden]="!showReport">
     <ul style="list-style-type: none; text-align: left">
       <li>Campaign Name: <span style="color: #A0A0A0">{{campaignName}}</span></li>
       <li>Start Date: <span style="color: #A0A0A0">{{campaignStart}}</span></li>
       <li>End Date: <span style="color: #A0A0A0">{{campaignEnd}}</span></li>
       <li>Total Contributors: <span style="color: #A0A0A0">{{campaignDonationCount}}</span></li>
-      <li>Total Raised Amount: <span style="color: #A0A0A0">{{campaignTotalContributions | currency: ' KES '}}</span></li>
+      <li>Total Raised Amount: <span style="color: #A0A0A0">{{campaignTotalContributions | currency: ' KES '}}</span>
+      </li>
       <li>Target Amount: <span style="color: #A0A0A0">{{campaignTargetContributions | currency: ' KES '}}</span></li>
     </ul>
     <div style="align-content: center">
+      <button [hidden]="!isContributorsAvailable" class="sikapa-btn" type="button" style="align-content: center"
+              tabindex="0"
+              (click)="renderContributorsPage()">
+        <span>Contributors</span>
+      </button>
       <button class="sikapa-btn" type="button" style="align-content: center" tabindex="0"
               (click)="renderCampaignListPage()">
+        <span>Back</span>
+      </button>
+    </div>
+  </div>
+  <div class="info-outline" [hidden]="!showContributors" *ngFor="let contributors of contributors">
+    <ul style="list-style-type: none; text-align: left">
+      <li>Phone Number: <span style="color: #A0A0A0">{{contributors.msisdn}}</span></li>
+      <li>Amount: <span style="color: #A0A0A0">{{contributors.amount | currency : ' KES' }}</span></li>
+    </ul>
+    <div style="align-content: center">
+      <button class="sikapa-btn" type="button" style="align-content: center" tabindex="0"
+              (click)="renderReportPage()">
         <span>Back</span>
       </button>
     </div>
