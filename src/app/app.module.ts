@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule} from "@angular/common/http";
 import {CampaignerComponent} from './campaigner/campaigner.component';
 import {ContributorHomeComponent} from './contributor/contributor-home.component';
 import {AppLayoutComponent} from './app-layout/app-layout.component';
@@ -14,7 +14,6 @@ import {ContributeComponent} from './contribute/contribute.component';
 import {FundCampaignComponent} from './fund-campaign/fund-campaign.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { CampaignerReportsComponent } from './campaigner-reports/campaigner-reports.component';
-import {HttpHeadersInterceptor} from "./interceptors/httpHeaders.interceptor";
 
 @NgModule({
   declarations: [
@@ -37,7 +36,7 @@ import {HttpHeadersInterceptor} from "./interceptors/httpHeaders.interceptor";
     NgbModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true}
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

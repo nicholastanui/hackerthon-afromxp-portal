@@ -23,18 +23,18 @@
         <div class="wrapper">
           <div class="form">
             <div class="inputfield">
-              <label>Phone Number</label>
-              <input type="number" class="input" name="msisdn" formControlName="msisdn">
+<!--              <label>Phone Number</label>-->
+              <input type="number" class="input" name="msisdn" formControlName="msisdn" placeholder="Phone Number">
             </div>
             <div class="inputfield">
-              <label>Campaign Name</label>
-              <input type="text" class="input" name="campaignName" formControlName="campaignName">
+<!--              <label>Campaign Name</label>-->
+              <input type="text" class="input" name="campaignName" formControlName="campaignName" placeholder="Campaign Name">
             </div>
             <div class="inputfield">
-              <label>Campaign Type</label>
+<!--              <label>Campaign Type</label>-->
               <div class="custom_select">
                 <select formControlName="campaignType">
-                  <option value="">Select</option>
+                  <option value="">Campaign Type</option>
                   <option value="Ceremony">Ceremony</option>
                   <option value="Humanitarian">Humanitarian</option>
                   <option value="Religion">Religion</option>
@@ -43,14 +43,14 @@
               </div>
             </div>
             <div class="inputfield">
-              <label>Target Amount</label>
-              <input type="number" class="input" name="targetAmount" formControlName="targetAmount">
+<!--              <label>Target Amount</label>-->
+              <input type="number" class="input" name="targetAmount" formControlName="targetAmount" placeholder="Target Amount">
             </div>
             <div class="inputfield">
-              <label>Campaign Duration</label>
+<!--              <label>Campaign Duration</label>-->
               <div class="custom_select">
                 <select formControlName="campaignDuration">
-                  <option value="">Select</option>
+                  <option value="">Campaign Duration</option>
                   <option value="7">7 days</option>
                   <option value="14">14 days</option>
                   <option value="30">30 days</option>
@@ -60,6 +60,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <div style="align-content: center">
+          <input type="checkbox" id="terms" name="terms" value="acceptTerms">
+          <label for="terms"> Accept <span><a href="">terms of service</a></span></label><br>
         </div>
         <div style="align-content: center">
           <button class="sikapa-btn" type="button" style="align-content: center" tabindex="0"
