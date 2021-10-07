@@ -29,7 +29,7 @@ export class CampaignerComponent implements OnInit, OnDestroy {
   public campaignId: string = '';
   public referUrl: string = '';
   public applicationForm: FormGroup;
-  public baseUrl = 'http://104.248.59.79:9000/afro-mxp/page/fund/';
+  public baseUrl = 'https://www.brainpesa.com/sikapa/page/fund/';
   public whatsAppUrl = 'https://wa.me/?text=';
   private subscriptions: Subscription[] = [];
 
