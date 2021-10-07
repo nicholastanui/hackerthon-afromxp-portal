@@ -36,6 +36,9 @@ export class ContributeComponent implements OnInit {
   public campaignType: string = '';
   public targetAmount: string = '';
   public campaignStatus: string = '';
+  public paidAmount: string = '';
+  public transactionId: string = '';
+
 
   constructor(private route: ActivatedRoute,
               private notification: NotificationService,
@@ -118,6 +121,8 @@ export class ContributeComponent implements OnInit {
               this.showLoading = false;
               if (responseCode === 0) {
                 this.pageTitle = 'Funding Success'
+                this.paidAmount = fundStatusResponse.amount;
+                this.transactionId = fundStatusResponse.mpesatxid;
                 this.displaySuccessPayment();
               } else {
                 this.pageTitle = 'Funding Failed'

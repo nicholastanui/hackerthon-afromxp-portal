@@ -48,7 +48,7 @@
     </div>
     <div [hidden]="!showSuccessFunding">
       <h5 style="color: #22BB33">PAYMENT COMPLETED!</h5>
-      <p style="color: #A0A0A0">Your payment has been received.</p>
+      <p style="color: #A0A0A0">Your payment transaction id <b>{{transactionId}}}</b> of <b>{{paidAmount | currency : 'KES'}}}</b> has been received.</p>
       <p style="color: #A0A0A0">Thank you for your contribution.</p>
     </div>
     <div [hidden]="!showFailedFunding">
