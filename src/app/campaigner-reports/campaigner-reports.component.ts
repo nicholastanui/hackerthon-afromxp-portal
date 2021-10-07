@@ -88,6 +88,7 @@ export class CampaignerReportsComponent implements OnInit, OnDestroy {
             this.campaignTargetContributions = responseData.summary[0]?.target;
             if (responseData.contributions.length > 0) {
               this.isContributorsAvailable = true;
+              console.log("isContributorsAvailable -> True")
               responseData.contributions.forEach((contributor: ContributorsModel) => {
                 this.contributors.push(
                   {
